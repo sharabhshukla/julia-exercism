@@ -1,0 +1,4 @@
+name = "exercism"
+uuid = "b9a053ea-7bc6-4b0a-b925-c0a38268c066"
+authors = ["Sharabh Shukla <sharabh2019@gmail.com>"]
+version = "0.1.0"
