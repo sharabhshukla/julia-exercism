@@ -47,6 +47,8 @@ jobs:
         cd("docs");
         Pkg.activate("."); Pkg.instantiate();
         serve(single=true, cleanup=false); lunr(); optimize(minify=false, prerender=false);
+        dst = "../docs/__site";
+        mkpath(dst);
     - name: Build and Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
