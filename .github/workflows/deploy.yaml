@@ -34,24 +34,16 @@ jobs:
     #   Julia packages which may be required to successfully build your site.
     #   The last line should be `optimize()` though you may want to give it
     #   specific arguments, see the documentation or ?optimize in the REPL.
-    #  here all the assets or code for the franklin documnetation resides in /docs folder 
-    - run:  
-        julia -e '
-        cd("/docs");
-        using Pkg;
-        Pkg.add(Pkg.PackageSpec(name="NodeJS"));
-        using NodeJS;
-        run(`$(npm_cmd()) install lunr`);
-        run(`$(npm_cmd()) install cheerio`);
-        Pkg.add(Pkg.PackageSpec(name="Franklin", rev="master"));
-        using Franklin;
-        Pkg.activate("."); Pkg.instantiate();
-        serve(single=true, cleanup=false); lunr(); optimize(minify=false, prerender=false);
-        dst = "../docs/__site";
-        mkpath(dst);
+    - run:  julia -e '
+            cd("/docs");
+            using Pkg; Pkg.activate("."); Pkg.instantiate();
+            cd("Julia-Practice-Docs");
+            using NodeJS; run(`$(npm_cmd()) install highlight.js`);
+            using Franklin;
+            optimize()'
     - name: Build and Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages
-        FOLDER: __site
+        FOLDER: /docs/Julia-Practice-Docs/__site
