@@ -37,7 +37,7 @@ jobs:
     #  here all the assets or code for the franklin documnetation resides in /docs folder 
     - run:  
         julia -e '
-        cd("docs");
+        cd("/docs");
         using Pkg;
         Pkg.add(Pkg.PackageSpec(name="NodeJS"));
         using NodeJS;
